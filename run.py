@@ -1,7 +1,7 @@
 import argparse
 import os
 import torch
-from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast
+from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast,Exp_Long_Term_Forecast_KPI
 from exp.exp_imputation import Exp_Imputation
 from exp.exp_short_term_forecasting import Exp_Short_Term_Forecast
 from exp.exp_anomaly_detection import Exp_Anomaly_Detection
@@ -107,7 +107,10 @@ if __name__ == '__main__':
     print(args)
 
     if args.task_name == 'long_term_forecast':
-        Exp = Exp_Long_Term_Forecast
+        if args.model_id[:3]=='KPI':
+            Exp = Exp_Long_Term_Forecast_KPI
+        else:
+            Exp = Exp_Long_Term_Forecast
     elif args.task_name == 'short_term_forecast':
         Exp = Exp_Short_Term_Forecast
     elif args.task_name == 'imputation':
